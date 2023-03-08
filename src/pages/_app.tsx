@@ -23,6 +23,10 @@ export default function App(props: MyAppProps) {
     <CacheProvider value={emotionCache}>
       <Head>
         <meta name='viewport' content='initial-scale=1, width=device-width' />
+        <meta
+          name='og:image'
+          content='https://res.cloudinary.com/abide-in-the-vine/image/upload/v1678247987/jeff%20dev%20blog/banner_yvqp77.png'
+        />
       </Head>
       <ThemeProvider theme={theme}>
         <CssBaseline />
