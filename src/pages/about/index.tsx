@@ -1,11 +1,11 @@
-import { Box, Button, Typography } from '@mui/material';
+import { Box, Button, Container, Typography } from '@mui/material';
 import { type NextPage } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
 
 const AboutPage: NextPage = () => {
   return (
-    <>
+    <Container>
       <Head>
         <title>About Movuex</title>
       </Head>
@@ -26,7 +26,7 @@ const AboutPage: NextPage = () => {
           </Button>
         </Box>
       </Box>
-    </>
+    </Container>
   );
 };
 

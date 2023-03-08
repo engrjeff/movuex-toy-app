@@ -18,4 +18,5 @@ export interface TvShowDetail extends TvShow {
   number_of_seasons: number;
   episode_run_time: number;
   homepage: string;
+  backdrop_path: string;
 }

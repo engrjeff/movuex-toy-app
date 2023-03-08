@@ -18,12 +18,9 @@ const MovieCard = ({ movie }: MovieCardProps) => {
           style={{ objectFit: 'cover', borderRadius: '8px' }}
         />
       </Box>
-      <Box mt={2}>
-        <Typography component='h3' fontSize={13} fontWeight={600} textTransform='capitalize'>
-          {movie.title}
-        </Typography>
-        <Chip label='Movie' size='small' />
-      </Box>
+      <Typography mt={2} component='h3' fontSize={13} fontWeight={600} textTransform='capitalize'>
+        {movie.title}
+      </Typography>
     </AppLink>
   );
 };

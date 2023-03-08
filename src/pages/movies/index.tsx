@@ -2,7 +2,7 @@ import { type NextPage, type GetServerSideProps } from 'next';
 import Head from 'next/head';
 import { ParsedUrlQuery } from 'querystring';
 
-import { Box, Typography } from '@mui/material';
+import { Box, Typography, Container } from '@mui/material';
 
 import { Movie } from '@/features/movies/types';
 import { getMovies } from '@/features/movies/service';
@@ -21,7 +21,7 @@ const MoviesPage: NextPage<MoviesPageProps> = (props) => {
   const { results: movies, total_pages, page } = props;
 
   return (
-    <>
+    <Container>
       <Head>
         <title>Movuex | Movies</title>
       </Head>
@@ -42,7 +42,7 @@ const MoviesPage: NextPage<MoviesPageProps> = (props) => {
           </Box>
         </Box>
       )}
-    </>
+    </Container>
   );
 };
 

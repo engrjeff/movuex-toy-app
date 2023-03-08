@@ -18,12 +18,9 @@ const TvShowCard = ({ tvShow }: TvShowCardProps) => {
           style={{ objectFit: 'cover', borderRadius: '8px' }}
         />
       </Box>
-      <Box mt={2}>
-        <Typography component='h3' fontSize={13} fontWeight={600} textTransform='capitalize'>
-          {tvShow.name}
-        </Typography>
-        <Chip label='TV Show' size='small' />
-      </Box>
+      <Typography mt={2} component='h3' fontSize={13} fontWeight={600} textTransform='capitalize'>
+        {tvShow.name}
+      </Typography>
     </AppLink>
   );
 };

@@ -1,9 +1,8 @@
-import { apiClient, createUrl, getPosterPath, PaginatedResult } from '@/lib/api';
+import { apiClient, getBackdropPath, getPosterPath, PaginatedResult } from '@/lib/api';
 import { TvShow, TvShowDetail } from './types';
 
 export const getTvShows = async (page: string = '1'): Promise<PaginatedResult<TvShow>> => {
-  const url = createUrl(`tv/popular?page=${page}`);
-  const response = await apiClient.get<PaginatedResult<TvShow>>(url);
+  const response = await apiClient.get<PaginatedResult<TvShow>>(`tv/popular?page=${page}`);
 
   return {
     ...response.data,
@@ -15,11 +14,11 @@ export const getTvShows = async (page: string = '1'): Promise<PaginatedResult<Tv
 };
 
 export const getTvShowById = async (id: string): Promise<TvShowDetail> => {
-  const url = createUrl(`tv/${id}`);
-  const response = await apiClient.get<TvShowDetail>(url);
+  const response = await apiClient.get<TvShowDetail>(`tv/${id}`);
 
   return {
     ...response.data,
     poster_path: getPosterPath(response.data.poster_path),
+    backdrop_path: getBackdropPath(response.data.backdrop_path),
   };
 };

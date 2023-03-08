@@ -17,7 +17,13 @@ function AppPagination({ count, currentPage, rootPath }: AppPaginationProps) {
       renderItem={(item) => (
         <PaginationItem
           component={Link}
-          href={`/${rootPath}${item.page === 1 ? '' : `?page=${item.page}`}`}
+          href={`/${rootPath}${
+            item.page === 1
+              ? ''
+              : rootPath.includes('?')
+              ? `&page=${item.page}`
+              : `?page=${item.page}`
+          }`}
           {...item}
           selected={item.page === currentPage}
         />

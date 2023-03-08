@@ -2,11 +2,19 @@ import { createTheme } from '@mui/material/styles';
 
 const theme = createTheme({
   palette: {
+    mode: 'dark',
     primary: {
-      main: '#700cb3',
+      main: '#E50A13',
     },
   },
   components: {
+    MuiOutlinedInput: {
+      styleOverrides: {
+        root: {
+          borderRadius: 100,
+        },
+      },
+    },
     MuiButton: {
       defaultProps: {
         variant: 'contained',

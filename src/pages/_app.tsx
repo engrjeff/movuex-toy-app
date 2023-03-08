@@ -8,7 +8,6 @@ import CssBaseline from '@mui/material/CssBaseline';
 import createEmotionCache from '@/lib/createEmotionCache';
 import theme from '@/lib/theme';
 import Header from '@/components/Header';
-import { Container } from '@mui/material';
 import Footer from '@/components/Footer';
 
 const clientSideEmotionCache = createEmotionCache();
@@ -27,12 +26,10 @@ export default function App(props: MyAppProps) {
       </Head>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <Container>
-          <Header />
-          <main style={{ minHeight: '80vh' }}>
-            <Component {...pageProps} />
-          </main>
-        </Container>
+        <Header />
+        <main style={{ minHeight: '80vh' }}>
+          <Component {...pageProps} />
+        </main>
         <Footer />
       </ThemeProvider>
     </CacheProvider>

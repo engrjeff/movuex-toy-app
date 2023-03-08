@@ -2,7 +2,7 @@ import { type NextPage, type GetServerSideProps } from 'next';
 import Head from 'next/head';
 import { ParsedUrlQuery } from 'querystring';
 
-import { Box, Typography } from '@mui/material';
+import { Box, Container, Typography } from '@mui/material';
 
 import { TvShow } from '@/features/tv/types';
 import { getTvShows } from '@/features/tv/service';
@@ -21,7 +21,7 @@ const TvShowsPage: NextPage<TvShowsPageProps> = (props) => {
   const { results: shows, total_pages, page } = props;
 
   return (
-    <>
+    <Container>
       <Head>
         <title>Movuex | TV Shows</title>
       </Head>
@@ -43,7 +43,7 @@ const TvShowsPage: NextPage<TvShowsPageProps> = (props) => {
           </Box>
         </Box>
       )}
-    </>
+    </Container>
   );
 };
 
