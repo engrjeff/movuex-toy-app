@@ -40,6 +40,9 @@ const MoviesPage: NextPage<MoviesPageProps> = (props) => {
               <MovieCard key={movie.id} movie={movie} />
             ))}
           </Box>
+          <Box display='flex' justifyContent='flex-end' my={3}>
+            <AppPagination count={total_pages} currentPage={page} rootPath='movies' />
+          </Box>
         </Box>
       )}
     </Container>

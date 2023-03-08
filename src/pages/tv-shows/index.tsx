@@ -41,6 +41,9 @@ const TvShowsPage: NextPage<TvShowsPageProps> = (props) => {
               <TvShowCard key={show.id} tvShow={show} />
             ))}
           </Box>
+          <Box display='flex' justifyContent='flex-end' my={3}>
+            <AppPagination count={total_pages} currentPage={page} rootPath='tv-shows' />
+          </Box>
         </Box>
       )}
     </Container>
