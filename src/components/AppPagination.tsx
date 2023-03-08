@@ -14,6 +14,7 @@ function AppPagination({ count, currentPage, rootPath }: AppPaginationProps) {
       count={count}
       shape='rounded'
       color='primary'
+      page={currentPage}
       renderItem={(item) => (
         <PaginationItem
           component={Link}
