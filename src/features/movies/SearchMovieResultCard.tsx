@@ -1,4 +1,4 @@
-import { Card, CardContent, Typography } from '@mui/material';
+import { Box, Card, CardContent, Typography } from '@mui/material';
 import Image from 'next/image';
 import { Movie } from './types';
 
@@ -17,7 +17,15 @@ function SearchMovieResultCard({ movie }: SearchMovieResultCardProps) {
         },
       }}
     >
-      <Image src={movie.poster_path} alt={movie.title} width={150} height={200} />
+      <Box width={150} height={200}>
+        <Image
+          src={movie.poster_path}
+          alt={movie.title}
+          width={150}
+          height={200}
+          style={{ objectFit: 'cover' }}
+        />
+      </Box>
       <CardContent>
         <Typography variant='h6' component='h3'>
           {movie.title}
