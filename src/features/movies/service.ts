@@ -13,27 +13,31 @@ export const getMovies = async (page: string = '1'): Promise<PaginatedResult<Mov
   };
 };
 
-export const getMovieById = async (id: string): Promise<MovieDetail> => {
-  const response = await apiClient.get<MovieDetail>(
-    `movie/${id}?append_to_response=credits,keywords,videos`
-  );
+export const getMovieById = async (id: string): Promise<MovieDetail | null> => {
+  try {
+    const response = await apiClient.get<MovieDetail>(
+      `movie/${id}?append_to_response=credits,keywords,videos`
+    );
 
-  return {
-    ...response.data,
-    poster_path: getPosterPath(response.data.poster_path),
-    backdrop_path: getBackdropPath(response.data.backdrop_path),
-    credits: {
-      cast: response.data.credits.cast.slice(0, 12).map((c) => ({
-        ...c,
-        profile_path: getPosterPath(c.profile_path),
-      })),
-    },
-    videos: {
-      results: response.data.videos.results
-        .filter((v) => v.site === 'YouTube' && v.type === 'Trailer')
-        .slice(0, 1),
-    },
-  };
+    return {
+      ...response.data,
+      poster_path: getPosterPath(response.data.poster_path),
+      backdrop_path: getBackdropPath(response.data.backdrop_path),
+      credits: {
+        cast: response.data.credits.cast.slice(0, 12).map((c) => ({
+          ...c,
+          profile_path: getPosterPath(c.profile_path),
+        })),
+      },
+      videos: {
+        results: response.data.videos.results
+          .filter((v) => v.site === 'YouTube' && v.type === 'Trailer')
+          .slice(0, 1),
+      },
+    };
+  } catch (error) {
+    return null;
+  }
 };
 
 export const searchMovies = async (

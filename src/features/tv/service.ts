@@ -13,12 +13,16 @@ export const getTvShows = async (page: string = '1'): Promise<PaginatedResult<Tv
   };
 };
 
-export const getTvShowById = async (id: string): Promise<TvShowDetail> => {
-  const response = await apiClient.get<TvShowDetail>(`tv/${id}`);
+export const getTvShowById = async (id: string): Promise<TvShowDetail | null> => {
+  try {
+    const response = await apiClient.get<TvShowDetail>(`tv/${id}`);
 
-  return {
-    ...response.data,
-    poster_path: getPosterPath(response.data.poster_path),
-    backdrop_path: getBackdropPath(response.data.backdrop_path),
-  };
+    return {
+      ...response.data,
+      poster_path: getPosterPath(response.data.poster_path),
+      backdrop_path: getBackdropPath(response.data.backdrop_path),
+    };
+  } catch (error) {
+    return null;
+  }
 };

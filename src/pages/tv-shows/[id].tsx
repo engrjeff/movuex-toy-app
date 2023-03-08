@@ -99,6 +99,11 @@ export const getServerSideProps: GetServerSideProps<TvShowDetailPageProps> = asy
 
   const tvShow = await getTvShowById(id);
 
+  if (!tvShow)
+    return {
+      notFound: true,
+    };
+
   return {
     props: {
       tvShow,
