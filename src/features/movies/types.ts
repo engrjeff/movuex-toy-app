@@ -17,6 +17,14 @@ export interface Keyword {
   name: string;
 }
 
+export interface Video {
+  id: number;
+  key: string;
+  site: string;
+  type: string;
+  name: string;
+}
+
 export interface MovieCast {
   name: string;
   id: number;
@@ -34,5 +42,8 @@ export interface MovieDetail extends Movie {
   };
   keywords: {
     keywords: Keyword[];
+  };
+  videos: {
+    results: Video[];
   };
 }

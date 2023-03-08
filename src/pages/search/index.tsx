@@ -43,7 +43,7 @@ const SearchPage: NextPage<SearchPageProps> = (props) => {
                   <AppPagination
                     count={total_pages}
                     currentPage={page}
-                    rootPath={`/search?keyword=${keyword}`}
+                    rootPath={`search?keyword=${keyword}`}
                   />
                 )}
               </Stack>

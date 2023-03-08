@@ -15,7 +15,7 @@ export const getMovies = async (page: string = '1'): Promise<PaginatedResult<Mov
 
 export const getMovieById = async (id: string): Promise<MovieDetail> => {
   const response = await apiClient.get<MovieDetail>(
-    `movie/${id}?append_to_response=credits,keywords`
+    `movie/${id}?append_to_response=credits,keywords,videos`
   );
 
   return {
@@ -27,6 +27,11 @@ export const getMovieById = async (id: string): Promise<MovieDetail> => {
         ...c,
         profile_path: getPosterPath(c.profile_path),
       })),
+    },
+    videos: {
+      results: response.data.videos.results
+        .filter((v) => v.site === 'YouTube' && v.type === 'Trailer')
+        .slice(0, 1),
     },
   };
 };

@@ -15,6 +15,7 @@ import Banner from '@/components/Banner';
 import BackButton from '@/components/BackButton';
 import MovieCastCard from '@/features/movies/MovieCastCard';
 import MovieKeywords from '@/features/movies/MovieKeywords';
+import YouTube from '@/components/Youtube';
 
 interface MovieDetailPageProps {
   movie: MovieDetail;
@@ -85,11 +86,21 @@ const MovieDetailPage: NextPage<MovieDetailPageProps> = ({ movie }) => {
             </Container>
           </Banner>
           <Container>
-            <Stack component='section' py={4}>
+            <Stack
+              display={movie.keywords.keywords.length > 0 ? 'flex' : 'none'}
+              component='section'
+              py={4}
+            >
               <Typography gutterBottom component='h3' variant='h3'>
                 Keywords
               </Typography>
               <MovieKeywords keywords={movie.keywords.keywords} />
+            </Stack>
+            <Stack display={movie.videos.results[0] ? 'flex' : 'none'} component='section' py={4}>
+              <Typography gutterBottom component='h3' variant='h3'>
+                Trailer
+              </Typography>
+              <YouTube id={movie.videos.results[0].key} />
             </Stack>
             <Stack component='section' py={4}>
               <Typography gutterBottom component='h3' variant='h3'>
