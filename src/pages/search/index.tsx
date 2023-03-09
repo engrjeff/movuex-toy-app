@@ -57,7 +57,7 @@ const SearchPage: NextPage<SearchPageProps> = (props) => {
                 )}
               </Stack>
 
-              <Stack gap={4}>
+              <Stack gap={3}>
                 {results.map((movie) => (
                   <Link
                     key={movie.id}

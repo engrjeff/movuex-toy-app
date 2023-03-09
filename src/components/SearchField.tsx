@@ -1,4 +1,4 @@
-import { ChangeEventHandler, FormEventHandler, useState } from 'react';
+import { ChangeEventHandler, FormEventHandler, useEffect, useRef, useState } from 'react';
 
 import Box from '@mui/material/Box';
 import InputAdornment from '@mui/material/InputAdornment';
@@ -90,13 +90,25 @@ function SearchField() {
   const inSmallScreen = useIsSmallScreen();
   const [searchShown, setSearchShown] = useState(false);
 
+  const hasMounted = useRef(false);
+
   const showSearch = () => setSearchShown(true);
 
   const closeSearch = () => setSearchShown(false);
 
+  const searchVisible = !inSmallScreen && hasMounted.current;
+
+  useEffect(() => {
+    if (hasMounted.current) return;
+
+    if (inSmallScreen) {
+      hasMounted.current = true;
+    }
+  }, [inSmallScreen]);
+
   return (
     <>
-      {inSmallScreen ? (
+      {!searchVisible ? (
         <IconButton onClick={showSearch} sx={{ ml: 'auto' }}>
           <SearchIcon />
         </IconButton>

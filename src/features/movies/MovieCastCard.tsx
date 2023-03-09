@@ -9,8 +9,14 @@ interface MovieCastCardProps {
 
 function MovieCastCard({ cast }: MovieCastCardProps) {
   return (
-    <Card sx={{ width: 150 }} variant='outlined'>
-      <Image src={cast.profile_path} alt={cast.name} width={150} height={200} />
+    <Card sx={{ minWidth: 150, flex: 1 }} variant='outlined'>
+      <Image
+        src={cast.profile_path}
+        alt={cast.name}
+        width={150}
+        height={200}
+        style={{ width: '100%', objectFit: 'cover' }}
+      />
       <CardContent>
         <Typography gutterBottom variant='h6' fontSize={14} component='div'>
           {cast.name}

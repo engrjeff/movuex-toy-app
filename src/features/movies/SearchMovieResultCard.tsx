@@ -12,7 +12,7 @@ function SearchMovieResultCard({ movie }: SearchMovieResultCardProps) {
 
   const width = inSmallScreen ? 100 : 150;
   const height = inSmallScreen ? 150 : 200;
-  const charLimit = inSmallScreen ? 120 : 400;
+  const charLimit = inSmallScreen ? 100 : 400;
 
   return (
     <Card
@@ -33,7 +33,7 @@ function SearchMovieResultCard({ movie }: SearchMovieResultCardProps) {
           style={{ objectFit: 'cover' }}
         />
       </Box>
-      <CardContent sx={{ maxHeight: height, overflow: 'hidden' }}>
+      <CardContent sx={{ maxHeight: height - 20, overflow: 'hidden' }}>
         <Typography variant='h6' component='h3'>
           {movie.title}
         </Typography>

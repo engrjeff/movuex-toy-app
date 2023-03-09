@@ -10,7 +10,16 @@ interface TvShowCardProps {
 const TvShowCard = ({ tvShow }: TvShowCardProps) => {
   return (
     <AppLink href={`/tv-shows/${tvShow.id}`}>
-      <Box sx={{ position: 'relative', width: '100%', height: 330 }}>
+      <Box
+        sx={{
+          position: 'relative',
+          width: '100%',
+          height: {
+            xs: 220,
+            sm: 330,
+          },
+        }}
+      >
         <Image
           src={tvShow.poster_path}
           alt={tvShow.name}
