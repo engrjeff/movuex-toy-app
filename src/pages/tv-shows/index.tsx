@@ -2,7 +2,7 @@ import { type NextPage, type GetServerSideProps } from 'next';
 import Head from 'next/head';
 import { ParsedUrlQuery } from 'querystring';
 
-import { Box, Container, Typography } from '@mui/material';
+import { Box, Container, Stack, Typography } from '@mui/material';
 
 import { TvShow } from '@/features/tv/types';
 import { getTvShows } from '@/features/tv/service';
@@ -12,6 +12,7 @@ import { PaginatedResult } from '@/lib/api';
 import AppPagination from '@/components/AppPagination';
 import useLoading from '@/hooks/useLoading';
 import AppLoadingIndicator from '@/components/AppLoadingIndicator';
+import SectionTitle from '@/components/SectionTitle';
 
 type TvShowsPageProps = PaginatedResult<TvShow>;
 
@@ -30,13 +31,27 @@ const TvShowsPage: NextPage<TvShowsPageProps> = (props) => {
         <AppLoadingIndicator />
       ) : (
         <Box py={4}>
-          <Box display='flex' justifyContent='space-between'>
-            <Typography component='h2' variant='h4' mb={3}>
-              Popular TV Shows
-            </Typography>
+          <Stack
+            display='flex'
+            flexDirection={{ xs: 'column', sm: 'row' }}
+            justifyContent='space-between'
+            alignItems={{ xs: 'flex-start', sm: 'center' }}
+            spacing={2}
+            mb={3}
+          >
+            <SectionTitle as='h2'>Popular TV Shows</SectionTitle>
             <AppPagination count={total_pages} currentPage={page} rootPath='tv-shows' />
-          </Box>
-          <Box display='grid' gridTemplateColumns='repeat(5, 1fr)' gap={2}>
+          </Stack>
+          <Box
+            display='grid'
+            gridTemplateColumns={{
+              xs: 'repeat(2, 1fr)',
+              sm: 'repeat(3, 1fr)',
+              md: 'repeat(4, 1fr)',
+              lg: 'repeat(5, 1fr)',
+            }}
+            gap={{ xs: 2, sm: 3 }}
+          >
             {shows.map((show) => (
               <TvShowCard key={show.id} tvShow={show} />
             ))}

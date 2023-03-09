@@ -10,7 +10,16 @@ interface MovieCardProps {
 const MovieCard = ({ movie }: MovieCardProps) => {
   return (
     <AppLink href={`/movies/${movie.id}`}>
-      <Box sx={{ position: 'relative', width: '100%', height: 330 }}>
+      <Box
+        sx={{
+          position: 'relative',
+          width: '100%',
+          height: {
+            xs: 220,
+            sm: 330,
+          },
+        }}
+      >
         <Image
           src={movie.poster_path}
           alt={movie.title}

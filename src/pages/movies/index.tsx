@@ -2,7 +2,7 @@ import { type NextPage, type GetServerSideProps } from 'next';
 import Head from 'next/head';
 import { ParsedUrlQuery } from 'querystring';
 
-import { Box, Typography, Container } from '@mui/material';
+import { Box, Container, Stack } from '@mui/material';
 
 import { Movie } from '@/features/movies/types';
 import { getMovies } from '@/features/movies/service';
@@ -12,6 +12,7 @@ import { PaginatedResult } from '@/lib/api';
 import AppPagination from '@/components/AppPagination';
 import useLoading from '@/hooks/useLoading';
 import AppLoadingIndicator from '@/components/AppLoadingIndicator';
+import SectionTitle from '@/components/SectionTitle';
 
 type MoviesPageProps = PaginatedResult<Movie>;
 
@@ -29,13 +30,27 @@ const MoviesPage: NextPage<MoviesPageProps> = (props) => {
         <AppLoadingIndicator />
       ) : (
         <Box py={4}>
-          <Box display='flex' justifyContent='space-between'>
-            <Typography component='h2' variant='h4' mb={3}>
-              Now Playing
-            </Typography>
+          <Stack
+            display='flex'
+            flexDirection={{ xs: 'column', sm: 'row' }}
+            justifyContent='space-between'
+            alignItems={{ xs: 'flex-start', sm: 'center' }}
+            spacing={2}
+            mb={3}
+          >
+            <SectionTitle as='h2'>Movies - Now Playing</SectionTitle>
             <AppPagination count={total_pages} currentPage={page} rootPath='movies' />
-          </Box>
-          <Box display='grid' gridTemplateColumns='repeat(5, 1fr)' gap={2}>
+          </Stack>
+          <Box
+            display='grid'
+            gridTemplateColumns={{
+              xs: 'repeat(2, 1fr)',
+              sm: 'repeat(3, 1fr)',
+              md: 'repeat(4, 1fr)',
+              lg: 'repeat(5, 1fr)',
+            }}
+            gap={{ xs: 2, sm: 3 }}
+          >
             {movies.map((movie) => (
               <MovieCard key={movie.id} movie={movie} />
             ))}

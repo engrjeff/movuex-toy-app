@@ -1,38 +1,40 @@
 import React from 'react';
-import { useRouter } from 'next/router';
-import { Box, Container, Typography } from '@mui/material';
-import AppLink from './AppLink';
-import Link from 'next/link';
+
+import Box from '@mui/material/Box';
+import Container from '@mui/material/Container';
+
 import SearchField from './SearchField';
+import Brand from './Brand';
+import NavLinks from './NavLinks';
+import MobileNavigation from './MobileNavigation';
 
 function Header() {
-  const router = useRouter();
-
-  const activeRoute = router.pathname;
-
   return (
-    <Box component='header' py={2} borderBottom={1} borderColor='divider'>
-      <Container sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-        <Typography component='h1' variant='h3'>
-          <Link href='/' style={{ color: 'inherit', textDecoration: 'none' }}>
-            Movuex
-          </Link>
-        </Typography>
+    <Box
+      component='header'
+      py={2}
+      borderBottom={1}
+      borderColor='divider'
+      position='sticky'
+      top={0}
+      bgcolor={(theme) => theme.palette.background.paper}
+      zIndex={(theme) => theme.zIndex.appBar}
+    >
+      <Container
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: 2,
+          justifyContent: {
+            sm: 'flex-start',
+            md: 'space-between',
+          },
+        }}
+      >
+        <MobileNavigation />
+        <Brand />
+        <NavLinks />
         <SearchField />
-        <Box component='nav'>
-          <AppLink href='/' className={activeRoute === '/' ? 'active' : ''}>
-            Home
-          </AppLink>
-          <AppLink href='/movies' className={activeRoute === '/movies' ? 'active' : ''}>
-            Movies
-          </AppLink>
-          <AppLink href='/tv-shows' className={activeRoute === '/tv-shows' ? 'active' : ''}>
-            TV Shows
-          </AppLink>
-          <AppLink href='/about' className={activeRoute === '/about' ? 'active' : ''}>
-            About
-          </AppLink>
-        </Box>
       </Container>
     </Box>
   );

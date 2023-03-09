@@ -4,17 +4,17 @@ import Image from 'next/image';
 
 import { ParsedUrlQuery } from 'querystring';
 
-import { Box, Button, Container, Stack, Typography } from '@mui/material';
-import OpenInNewIcon from '@mui/icons-material/OpenInNew';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { Box, Container, Stack, Typography } from '@mui/material';
 
 import { getTvShowById } from '@/features/tv/service';
 import { TvShowDetail } from '@/features/tv/types';
-import AppLink from '@/components/AppLink';
 import useLoading from '@/hooks/useLoading';
 import AppLoadingIndicator from '@/components/AppLoadingIndicator';
 import BackButton from '@/components/BackButton';
 import Banner from '@/components/Banner';
+import GoToPageLink from '@/components/GoToPageLink';
+import SectionTitle from '@/components/SectionTitle';
+import useIsSmallScreen from '@/hooks/useIsSmallScreen';
 
 interface TvShowDetailPageProps {
   tvShow: TvShowDetail;
@@ -22,6 +22,8 @@ interface TvShowDetailPageProps {
 
 const TvShowDetailPage: NextPage<TvShowDetailPageProps> = ({ tvShow }) => {
   const isLoading = useLoading();
+
+  const inSmallScreen = useIsSmallScreen();
 
   return (
     <>
@@ -36,33 +38,45 @@ const TvShowDetailPage: NextPage<TvShowDetailPageProps> = ({ tvShow }) => {
             <BackButton backTo='/tv-shows' />
           </Container>
           <Banner imagePath={tvShow.backdrop_path}>
-            <Container sx={{ display: 'flex', gap: 6 }}>
-              <Box sx={{ position: 'relative' }}>
-                <Image
-                  src={tvShow.poster_path}
-                  alt={tvShow.name}
-                  height={330}
-                  width={220}
-                  style={{ objectFit: 'cover', borderRadius: '8px' }}
-                />
-              </Box>
+            <Container
+              sx={{
+                display: 'flex',
+                gap: 6,
+                flexDirection: {
+                  xs: 'column',
+                  sm: 'row',
+                },
+              }}
+            >
+              {inSmallScreen ? null : (
+                <Box sx={{ position: 'relative' }}>
+                  <Image
+                    src={tvShow.poster_path}
+                    alt={tvShow.name}
+                    height={450}
+                    width={300}
+                    style={{ objectFit: 'cover', borderRadius: '8px' }}
+                  />
+                </Box>
+              )}
               <Stack gap={2} alignItems='flex-start'>
-                <Button
-                  LinkComponent='a'
-                  href={tvShow.homepage}
-                  target='_blank'
-                  referrerPolicy='no-referrer'
-                  endIcon={<OpenInNewIcon />}
-                >
-                  Go to Page
-                </Button>
-                <Typography component='h2' variant='h3'>
-                  {tvShow.name}
-                </Typography>
+                <GoToPageLink href={tvShow.homepage} />
+                <SectionTitle as='h2'>{tvShow.name}</SectionTitle>
                 <Typography color='orange' fontWeight={600}>
                   IMDB: {tvShow.vote_average}
                 </Typography>
-                <Typography>{tvShow.overview}</Typography>
+                {inSmallScreen && (
+                  <Box sx={{ position: 'relative' }}>
+                    <Image
+                      src={tvShow.poster_path}
+                      alt={tvShow.name}
+                      height={225}
+                      width={150}
+                      style={{ objectFit: 'cover', borderRadius: '8px' }}
+                    />
+                  </Box>
+                )}
+                <Typography maxWidth={{ xs: '100%', md: '80%' }}>{tvShow.overview}</Typography>
                 <Typography>
                   <Typography component='span' fontWeight='bold'>
                     First Air Date:{' '}

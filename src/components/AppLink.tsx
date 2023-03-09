@@ -5,7 +5,6 @@ const AppLink = styled(Link)(({ theme }) => ({
   textTransform: 'uppercase',
   color: 'inherit',
   textDecoration: 'none',
-  padding: '0 12px',
 
   '&:hover': {
     color: theme.palette.primary.main,
@@ -13,6 +12,10 @@ const AppLink = styled(Link)(({ theme }) => ({
 
   '&.active': {
     color: theme.palette.primary.main,
+  },
+
+  '&.active-mobile': {
+    backgroundColor: theme.palette.primary.main,
   },
 }));
 

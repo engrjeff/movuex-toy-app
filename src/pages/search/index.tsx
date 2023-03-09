@@ -1,15 +1,19 @@
-import AppLoadingIndicator from '@/components/AppLoadingIndicator';
-import AppPagination from '@/components/AppPagination';
+import { GetServerSideProps, type NextPage } from 'next';
+import Head from 'next/head';
+import Link from 'next/link';
+import { ParsedUrlQuery } from 'querystring';
+
+import { Container, Stack, Typography } from '@mui/material';
+
 import SearchMovieResultCard from '@/features/movies/SearchMovieResultCard';
 import { searchMovies } from '@/features/movies/service';
 import { Movie } from '@/features/movies/types';
 import useLoading from '@/hooks/useLoading';
 import { PaginatedResult } from '@/lib/api';
-import { Container, Stack, Typography } from '@mui/material';
-import { GetServerSideProps, type NextPage } from 'next';
-import Head from 'next/head';
-import Link from 'next/link';
-import { ParsedUrlQuery } from 'querystring';
+
+import AppLoadingIndicator from '@/components/AppLoadingIndicator';
+import AppPagination from '@/components/AppPagination';
+import SectionTitle from '@/components/SectionTitle';
 
 interface SearchPageProps extends PaginatedResult<Movie> {
   keyword: string;
@@ -30,15 +34,20 @@ const SearchPage: NextPage<SearchPageProps> = (props) => {
       ) : (
         <Container>
           {results.length === 0 ? (
-            <Typography component='h2' variant='h4' mt={6}>
+            <SectionTitle as='h2' mt={6}>
               No results found
-            </Typography>
+            </SectionTitle>
           ) : (
-            <Stack py={6}>
-              <Stack flexDirection='row' justifyContent='space-between' mb={4}>
-                <Typography component='h2' variant='h4'>
-                  Results for &ldquo;{keyword}&rdquo;
-                </Typography>
+            <Stack py={4}>
+              <Stack
+                display='flex'
+                flexDirection={{ xs: 'column', sm: 'row' }}
+                justifyContent='space-between'
+                alignItems={{ xs: 'flex-start', sm: 'center' }}
+                spacing={2}
+                mb={3}
+              >
+                <SectionTitle as='h2'>Results for &ldquo;{keyword}&rdquo;</SectionTitle>
                 {total_pages > 1 && (
                   <AppPagination
                     count={total_pages}

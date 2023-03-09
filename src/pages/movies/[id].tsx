@@ -4,8 +4,7 @@ import Image from 'next/image';
 
 import { ParsedUrlQuery } from 'querystring';
 
-import { Box, Button, Container, Stack, Typography } from '@mui/material';
-import OpenInNewIcon from '@mui/icons-material/OpenInNew';
+import { Box, Container, Stack, Typography } from '@mui/material';
 
 import { getMovieById } from '@/features/movies/service';
 import { MovieDetail } from '@/features/movies/types';
@@ -16,6 +15,9 @@ import BackButton from '@/components/BackButton';
 import MovieCastCard from '@/features/movies/MovieCastCard';
 import MovieKeywords from '@/features/movies/MovieKeywords';
 import YouTube from '@/components/Youtube';
+import SectionTitle from '@/components/SectionTitle';
+import GoToPageLink from '@/components/GoToPageLink';
+import useIsSmallScreen from '@/hooks/useIsSmallScreen';
 
 interface MovieDetailPageProps {
   movie: MovieDetail;
@@ -23,6 +25,8 @@ interface MovieDetailPageProps {
 
 const MovieDetailPage: NextPage<MovieDetailPageProps> = ({ movie }) => {
   const isLoading = useLoading();
+
+  const inSmallScreen = useIsSmallScreen();
 
   return (
     <>
@@ -37,33 +41,47 @@ const MovieDetailPage: NextPage<MovieDetailPageProps> = ({ movie }) => {
             <BackButton backTo='/movies' />
           </Container>
           <Banner imagePath={movie.backdrop_path}>
-            <Container sx={{ display: 'flex', gap: 6 }}>
-              <Box sx={{ position: 'relative' }}>
-                <Image
-                  src={movie.poster_path}
-                  alt={movie.title}
-                  height={450}
-                  width={300}
-                  style={{ objectFit: 'cover', borderRadius: '8px' }}
-                />
-              </Box>
+            <Container
+              sx={{
+                display: 'flex',
+                gap: 6,
+                flexDirection: {
+                  xs: 'column',
+                  sm: 'row',
+                },
+              }}
+            >
+              {inSmallScreen ? null : (
+                <Box sx={{ position: 'relative' }}>
+                  <Image
+                    src={movie.poster_path}
+                    alt={movie.title}
+                    height={450}
+                    width={300}
+                    style={{ objectFit: 'cover', borderRadius: '8px' }}
+                  />
+                </Box>
+              )}
               <Stack gap={2} alignItems='flex-start'>
-                <Button
-                  LinkComponent='a'
-                  href={movie.homepage}
-                  target='_blank'
-                  referrerPolicy='no-referrer'
-                  endIcon={<OpenInNewIcon />}
-                >
-                  Go to Page
-                </Button>
-                <Typography component='h2' variant='h4'>
+                <GoToPageLink href={movie.homepage} />
+                <SectionTitle as='h2'>
                   {movie.title} ({movie.release_date.split('-')[0]})
-                </Typography>
+                </SectionTitle>
                 <Typography color='orange' fontWeight={600}>
                   IMDB: {movie.vote_average}
                 </Typography>
-                <Typography maxWidth='70%'>{movie.overview}</Typography>
+                {inSmallScreen && (
+                  <Box sx={{ position: 'relative' }}>
+                    <Image
+                      src={movie.poster_path}
+                      alt={movie.title}
+                      height={225}
+                      width={150}
+                      style={{ objectFit: 'cover', borderRadius: '8px' }}
+                    />
+                  </Box>
+                )}
+                <Typography maxWidth={{ xs: '100%', md: '80%' }}>{movie.overview}</Typography>
                 <Typography>
                   <Typography component='span' fontWeight='bold'>
                     Released Date:{' '}
@@ -90,22 +108,22 @@ const MovieDetailPage: NextPage<MovieDetailPageProps> = ({ movie }) => {
               display={movie.keywords.keywords.length > 0 ? 'flex' : 'none'}
               component='section'
               py={4}
+              gap={3}
             >
-              <Typography gutterBottom component='h3' variant='h3'>
-                Keywords
-              </Typography>
+              <SectionTitle as='h2'>Keywords</SectionTitle>
               <MovieKeywords keywords={movie.keywords.keywords} />
             </Stack>
-            <Stack display={movie.videos.results[0] ? 'flex' : 'none'} component='section' py={4}>
-              <Typography gutterBottom component='h3' variant='h3'>
-                Trailer
-              </Typography>
+            <Stack
+              gap={3}
+              display={movie.videos.results[0] ? 'flex' : 'none'}
+              component='section'
+              py={4}
+            >
+              <SectionTitle as='h2'>Trailer</SectionTitle>
               <YouTube id={movie.videos.results[0].key} />
             </Stack>
-            <Stack component='section' py={4}>
-              <Typography gutterBottom component='h3' variant='h3'>
-                Cast
-              </Typography>
+            <Stack gap={3} component='section' py={4}>
+              <SectionTitle as='h2'>Cast</SectionTitle>
               <Box display='flex' gap={3} flexWrap='wrap'>
                 {movie.credits.cast.map((c) => (
                   <MovieCastCard key={c.id} cast={c} />

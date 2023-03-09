@@ -12,7 +12,35 @@ function Footer() {
       gap={2}
     >
       <Typography variant='h4'>Movuex</Typography>
-      <Typography>Made with ❤️ by Jeff</Typography>
+      <Typography
+        sx={{
+          '& > a': {
+            textDecorationStyle: 'dotted',
+            fontWeight: 'bold',
+            color: (theme) => theme.palette.primary.main,
+          },
+        }}
+      >
+        Made with ❤️ by{' '}
+        <a href='https://jeffsegovia.dev' target='_blank' referrerPolicy='no-referrer'>
+          Jeff Segovia
+        </a>
+      </Typography>
+
+      <Typography
+        sx={{
+          '& > a': {
+            textDecorationStyle: 'dotted',
+            fontWeight: 'bold',
+            color: (theme) => theme.palette.primary.main,
+          },
+        }}
+      >
+        Powered by{' '}
+        <a href=' https://www.themoviedb.org/' target='_blank' referrerPolicy='no-referrer'>
+          The Movie DB
+        </a>
+      </Typography>
       <Typography>Copyright &copy; {new Date().getFullYear()}</Typography>
     </Stack>
   );

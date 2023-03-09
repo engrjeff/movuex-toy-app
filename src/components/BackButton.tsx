@@ -13,7 +13,7 @@ function BackButton({ backTo }: BackButtonProps) {
       startIcon={<ArrowBackIcon />}
       LinkComponent={AppLink}
       href={backTo}
-      sx={{ my: 6 }}
+      sx={{ my: { xs: 3, md: 6 } }}
     >
       Back
     </Button>

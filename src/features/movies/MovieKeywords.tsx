@@ -7,7 +7,7 @@ interface MovieKeywordsProps {
 
 function MovieKeywords({ keywords }: MovieKeywordsProps) {
   return (
-    <Stack flexDirection='row' gap={2} flexWrap='wrap'>
+    <Stack flexDirection='row' gap={1} flexWrap='wrap'>
       {keywords.map((item) => (
         <Chip key={item.id} label={item.name} variant='outlined' />
       ))}

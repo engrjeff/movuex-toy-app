@@ -1,3 +1,4 @@
+import useIsSmallScreen from '@/hooks/useIsSmallScreen';
 import { Box, Card, CardContent, Typography } from '@mui/material';
 import Image from 'next/image';
 import { Movie } from './types';
@@ -7,6 +8,12 @@ interface SearchMovieResultCardProps {
 }
 
 function SearchMovieResultCard({ movie }: SearchMovieResultCardProps) {
+  const inSmallScreen = useIsSmallScreen();
+
+  const width = inSmallScreen ? 100 : 150;
+  const height = inSmallScreen ? 150 : 200;
+  const charLimit = inSmallScreen ? 120 : 400;
+
   return (
     <Card
       variant='outlined'
@@ -17,16 +24,16 @@ function SearchMovieResultCard({ movie }: SearchMovieResultCardProps) {
         },
       }}
     >
-      <Box width={150} height={200}>
+      <Box width={width} height={height}>
         <Image
           src={movie.poster_path}
           alt={movie.title}
-          width={150}
-          height={200}
+          width={width}
+          height={height}
           style={{ objectFit: 'cover' }}
         />
       </Box>
-      <CardContent>
+      <CardContent sx={{ maxHeight: height, overflow: 'hidden' }}>
         <Typography variant='h6' component='h3'>
           {movie.title}
         </Typography>
@@ -34,7 +41,7 @@ function SearchMovieResultCard({ movie }: SearchMovieResultCardProps) {
           {movie.release_date}
         </Typography>
         <Typography fontSize={14} color='text.secondary'>
-          {movie.overview}
+          {movie.overview.slice(0, charLimit) + '...'}
         </Typography>
       </CardContent>
     </Card>
