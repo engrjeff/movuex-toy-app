@@ -5,7 +5,7 @@ import { Stack, Typography, Button } from '@mui/material';
 
 const ServerErrorPage = () => {
   return (
-    <Stack alignItems='center' py={8}>
+    <Stack alignItems='center' py={8} px={2}>
       <Head>
         <title>Movuex - 500 Server Error</title>
       </Head>

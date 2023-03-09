@@ -5,7 +5,7 @@ import { Stack, Typography, Button } from '@mui/material';
 
 const NotFoundPage = () => {
   return (
-    <Stack alignItems='center' py={8}>
+    <Stack alignItems='center' py={8} px={2}>
       <Head>
         <title>Movuex - 404 Not Found</title>
       </Head>

@@ -124,7 +124,16 @@ const MovieDetailPage: NextPage<MovieDetailPageProps> = ({ movie }) => {
             </Stack>
             <Stack gap={3} component='section' py={4}>
               <SectionTitle as='h2'>Cast</SectionTitle>
-              <Box display='flex' gap={3} flexWrap='wrap'>
+              <Box
+                display='grid'
+                gridTemplateColumns={{
+                  xs: 'repeat(2, 1fr)',
+                  sm: 'repeat(3, 1fr)',
+                  md: 'repeat(4, 1fr)',
+                  lg: 'repeat(5, 1fr)',
+                }}
+                gap={{ xs: 2, sm: 3 }}
+              >
                 {movie.credits.cast.map((c) => (
                   <MovieCastCard key={c.id} cast={c} />
                 ))}

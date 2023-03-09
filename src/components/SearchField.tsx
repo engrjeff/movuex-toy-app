@@ -117,7 +117,7 @@ function SearchField() {
       )}
 
       <Dialog
-        open={searchShown}
+        open={searchShown && inSmallScreen}
         onClose={closeSearch}
         PaperProps={{
           sx: { backgroundImage: 'none', bgcolor: (theme) => theme.palette.background.paper },
