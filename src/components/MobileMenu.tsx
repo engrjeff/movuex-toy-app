@@ -16,6 +16,7 @@ import HomeIcon from '@mui/icons-material/Home';
 import MovieIcon from '@mui/icons-material/Movie';
 import TvIcon from '@mui/icons-material/LiveTv';
 import AboutIcon from '@mui/icons-material/Info';
+import GitHubIcon from '@mui/icons-material/GitHub';
 
 import { useTheme } from '@mui/material/styles';
 
@@ -98,6 +99,20 @@ function MobileMenu() {
             </ListItemButton>
           </ListItem>
         </List>
+
+        <ListItem disablePadding sx={{ mt: 'auto', mb: 2 }}>
+          <ListItemButton
+            LinkComponent='a'
+            href='https://github.com/engrjeff/movuex-toy-app'
+            target='_blank'
+            referrerPolicy='no-referrer'
+          >
+            <ListItemIcon>
+              <GitHubIcon />
+            </ListItemIcon>
+            <ListItemText primary='Github Repo' />
+          </ListItemButton>
+        </ListItem>
       </Stack>
     </Drawer>
   );

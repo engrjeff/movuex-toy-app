@@ -104,19 +104,25 @@ function SearchField() {
     if (inSmallScreen) {
       hasMounted.current = true;
     }
+
+    return () => {
+      hasMounted.current = false;
+    };
   }, [inSmallScreen]);
 
   return (
     <>
-      {!searchVisible ? (
+      {inSmallScreen && (
         <IconButton onClick={showSearch} sx={{ ml: 'auto' }}>
           <SearchIcon />
         </IconButton>
-      ) : (
-        <SearchFieldInput />
       )}
 
+      <Box ml='auto' display={{ xs: 'none', md: 'block' }}>
+        <SearchFieldInput />
+      </Box>
       <Dialog
+        fullWidth
         open={searchShown && inSmallScreen}
         onClose={closeSearch}
         PaperProps={{
@@ -124,9 +130,9 @@ function SearchField() {
         }}
       >
         <DialogTitle>Search</DialogTitle>
-        <DialogContent>
+        <Box p={3} pt={1}>
           <SearchFieldInput width='100%' onClick={closeSearch} />
-        </DialogContent>
+        </Box>
       </Dialog>
     </>
   );
