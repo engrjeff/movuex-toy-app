@@ -38,7 +38,7 @@ const AboutPage: NextPage = () => {
           .
         </Typography>
         <Box display='flex' gap={2}>
-          <Button size='large' LinkComponent={Link} href='/movies'>
+          <Button size='large' LinkComponent={Link} href='/'>
             Go back to home
           </Button>
         </Box>

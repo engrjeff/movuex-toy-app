@@ -10,7 +10,7 @@ const ServerErrorPage = () => {
         <title>Movuex - 500 Server Error</title>
       </Head>
       <Typography variant='h1' fontWeight='bold'>
-        404
+        500
       </Typography>
       <Typography mb={6} variant='h6'>
         There is probably an error from the server
