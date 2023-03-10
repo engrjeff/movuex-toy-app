@@ -1,10 +1,11 @@
-import { createTheme } from '@mui/material/styles';
+import { createTheme } from "@mui/material/styles";
 
 const theme = createTheme({
   palette: {
-    mode: 'dark',
+    mode: "dark",
     primary: {
-      main: '#E50A13',
+      // main: '#E50A13',
+      main: "#FFB612",
     },
   },
   components: {
@@ -17,12 +18,12 @@ const theme = createTheme({
     },
     MuiButton: {
       defaultProps: {
-        variant: 'contained',
+        variant: "contained",
         disableElevation: true,
       },
       styleOverrides: {
         root: {
-          textTransform: 'capitalize',
+          textTransform: "capitalize",
           borderRadius: 100,
         },
       },

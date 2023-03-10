@@ -59,6 +59,10 @@ export default function App(props: MyAppProps) {
       <Head>
         <meta name='viewport' content='initial-scale=1, width=device-width' />
         <meta
+          name='description'
+          content='Movuex is a website where you can find movie information at the comfort of your home. Made by Jeff Segovia.'
+        />
+        <meta
           name='og:image'
           content='https://res.cloudinary.com/abide-in-the-vine/image/upload/v1678247987/jeff%20dev%20blog/banner_yvqp77.png'
         />

@@ -1,6 +1,8 @@
-import Pagination from '@mui/material/Pagination';
-import PaginationItem from '@mui/material/PaginationItem';
-import Link from 'next/link';
+import Link from "next/link";
+import { useRouter } from "next/router";
+
+import Pagination from "@mui/material/Pagination";
+import PaginationItem from "@mui/material/PaginationItem";
 
 interface AppPaginationProps {
   count: number;
@@ -9,6 +11,18 @@ interface AppPaginationProps {
 }
 
 function AppPagination({ count, currentPage, rootPath }: AppPaginationProps) {
+  const router = useRouter();
+
+  const handleClick = (page: number | null) => {
+    router.push({
+      pathname: `/${rootPath}`,
+      query: {
+        ...router.query,
+        page,
+      },
+    });
+  };
+
   return (
     <Pagination
       count={count}
@@ -17,15 +31,8 @@ function AppPagination({ count, currentPage, rootPath }: AppPaginationProps) {
       page={currentPage}
       renderItem={(item) => (
         <PaginationItem
-          component={Link}
-          href={`/${rootPath}${
-            item.page === 1
-              ? ''
-              : rootPath.includes('?')
-              ? `&page=${item.page}`
-              : `?page=${item.page}`
-          }`}
           {...item}
+          onClick={() => handleClick(item.page)}
           selected={item.page === currentPage}
         />
       )}

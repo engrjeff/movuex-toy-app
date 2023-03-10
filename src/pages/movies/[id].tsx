@@ -52,7 +52,10 @@ const MovieDetailPage: NextPage<MovieDetailPageProps> = ({ movie }) => {
                   alt={movie.title}
                   height={450}
                   width={300}
-                  style={{ objectFit: "cover", borderRadius: "8px" }}
+                  style={{
+                    objectFit: "cover",
+                    borderRadius: "8px",
+                  }}
                 />
               </Box>
             )}

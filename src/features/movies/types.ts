@@ -1,3 +1,5 @@
+import { ParsedUrlQuery } from "querystring";
+
 export interface Movie {
   title: string;
   vote_average: number;
@@ -46,4 +48,11 @@ export interface MovieDetail extends Movie {
   videos: {
     results: Video[];
   };
+}
+
+export interface GetMoviesUrlQuery extends ParsedUrlQuery {
+  page?: string;
+  genres?: string;
+  year?: string;
+  country?: string;
 }

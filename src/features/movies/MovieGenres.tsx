@@ -7,14 +7,20 @@ import ListItemText from "@mui/material/ListItemText";
 import ListSubheader from "@mui/material/ListSubheader";
 
 import type { Genre } from "./types";
+import useIsSmallScreen from "@/hooks/useIsSmallScreen";
 
 function MovieGenres({ genres }: { genres: Genre[] }) {
   const router = useRouter();
+
+  const inSmallScreen = useIsSmallScreen();
+
+  if (inSmallScreen) return null;
 
   const genresQuery = (router.query.genres as string) || "";
   return (
     <List
       sx={{
+        width: "min-content",
         px: 2,
         border: "1px solid",
         borderColor: (theme) => theme.palette.divider,
@@ -53,6 +59,7 @@ function MovieGenres({ genres }: { genres: Genre[] }) {
         <ListItem key={genre.id} disablePadding sx={{ mb: 0.5 }}>
           <ListItemButton
             sx={{
+              width: "max-content",
               borderRadius: 100,
               bgcolor:
                 genresQuery === genre.id.toString() ? "primary.main" : "",

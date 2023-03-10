@@ -8,10 +8,6 @@ const Home: NextPage = () => {
     <>
       <Head>
         <title>Movuex - Explore Movies</title>
-        <meta
-          name='description'
-          content='Movuex is a website where you can find movie information at the comfort of your home. Made by Jeff Segovia.'
-        />
       </Head>
       <Container>
         <Box display='flex' flexDirection='column' py={8} mt={4} gap={4}>

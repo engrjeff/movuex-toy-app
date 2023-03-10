@@ -4,15 +4,23 @@ import {
   getPosterPath,
   PaginatedResult,
 } from "@/lib/api";
-import { Genre, Movie, MovieDetail } from "./types";
+import { Genre, Movie, MovieDetail, GetMoviesUrlQuery } from "./types";
 
 export const getMovies = async (
-  page: string = "1",
-  genres: string = ""
+  queryOptions?: GetMoviesUrlQuery
 ): Promise<PaginatedResult<Movie>> => {
-  const url = genres
-    ? `/discover/movie?page=${page}&sort_by=popularity.desc&include_adult=false&with_genres=${genres}`
-    : `movie/popular?page=${page}`;
+  const params = {
+    with_genres: queryOptions?.genres,
+    watch_region: queryOptions?.country,
+    page: queryOptions?.page,
+    year: queryOptions?.year,
+  };
+
+  const paramsStr = Object.entries(params)
+    .map(([key, val]) => `${key}=${val}`)
+    .join("&");
+
+  const url = `discover/movie?&${paramsStr}sort_by=popularity.desc&include_adult=false`;
 
   const response = await apiClient.get<PaginatedResult<Movie>>(url);
 

@@ -1,7 +1,7 @@
-import { MovieCast } from './types';
+import { MovieCast } from "./types";
 
-import { Card, CardContent, Typography } from '@mui/material';
-import Image from 'next/image';
+import { Card, CardContent, Typography } from "@mui/material";
+import Image from "next/image";
 
 interface MovieCastCardProps {
   cast: MovieCast;
@@ -15,7 +15,7 @@ function MovieCastCard({ cast }: MovieCastCardProps) {
         alt={cast.name}
         width={150}
         height={200}
-        style={{ width: '100%', objectFit: 'cover' }}
+        style={{ width: "100%", objectFit: "cover", height: "auto" }}
       />
       <CardContent>
         <Typography gutterBottom variant='h6' fontSize={14} component='div'>
