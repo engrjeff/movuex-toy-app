@@ -55,4 +55,5 @@ export interface GetMoviesUrlQuery extends ParsedUrlQuery {
   genres?: string;
   year?: string;
   country?: string;
+  sortBy?: string;
 }

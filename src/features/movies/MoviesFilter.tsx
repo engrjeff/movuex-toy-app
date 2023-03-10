@@ -14,7 +14,6 @@ import FormControl from "@mui/material/FormControl";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 import Badge from "@mui/material/Badge";
-import Chip from "@mui/material/Chip";
 
 import CloseIcon from "@mui/icons-material/Close";
 import FilterIcon from "@mui/icons-material/FilterList";
@@ -78,7 +77,7 @@ function MoviesFilter({ genres, countries }: MoviesFilterProps) {
   );
 
   const truthyFilters = Object.entries(router.query).filter(
-    ([k, v]) => Boolean(v) && k !== "page"
+    ([k, v]) => Boolean(v) && !["page", "sortBy"].includes(k)
   );
 
   return (
@@ -146,7 +145,7 @@ function MoviesFilter({ genres, countries }: MoviesFilterProps) {
             </IconButton>
           </Stack>
           <Divider />
-          <Stack component='form' p={3} onSubmit={handleApplyFilter} gap={3}>
+          <Stack component='form' p={3} onSubmit={handleApplyFilter} gap={2}>
             <FormControl>
               <label id='year-filter'>Year</label>
               <RadioGroup
@@ -209,7 +208,7 @@ function MoviesFilter({ genres, countries }: MoviesFilterProps) {
                 )}
               />
             </FormControl>
-            <Stack flexDirection='row' gap={2} mt={4}>
+            <Stack gap={2} py={2}>
               <Button type='submit'>Apply Filters</Button>
               <Button variant='outlined' onClick={handleReset}>
                 Clear Filters

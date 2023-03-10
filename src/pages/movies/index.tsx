@@ -14,6 +14,7 @@ import SectionTitle from "@/components/SectionTitle";
 import MoviesGrid from "@/features/movies/MoviesGrid";
 import MovieGenres from "@/features/movies/MovieGenres";
 import MoviesFilter from "@/features/movies/MoviesFilter";
+import MoviesSort from "@/features/movies/MoviesSort";
 
 interface MoviesPageProps {
   moviesData: PaginatedResult<Movie>;
@@ -64,7 +65,10 @@ MoviesPage.getLayout = function getLayout(page: ReactElement<MoviesPageProps>) {
           <SectionTitle as='h2'>
             {selectedGenre ? selectedGenre.name + " Movies" : "Movies"}
           </SectionTitle>
-          <MoviesFilter genres={genres} countries={countries} />
+          <Box display='flex' gap={2}>
+            <MoviesSort />
+            <MoviesFilter genres={genres} countries={countries} />
+          </Box>
         </Stack>
         <Box display='flex' gap={4}>
           <MovieGenres genres={genres} />

@@ -14,13 +14,15 @@ export const getMovies = async (
     watch_region: queryOptions?.country,
     page: queryOptions?.page,
     year: queryOptions?.year,
+    sort_by: queryOptions?.sortBy ?? "popularity.desc",
+    include_adult: false,
   };
 
   const paramsStr = Object.entries(params)
     .map(([key, val]) => `${key}=${val}`)
     .join("&");
 
-  const url = `discover/movie?&${paramsStr}sort_by=popularity.desc&include_adult=false`;
+  const url = `discover/movie?${paramsStr}`;
 
   const response = await apiClient.get<PaginatedResult<Movie>>(url);
 
