@@ -28,6 +28,28 @@ function MovieGenres({ genres }: { genres: Genre[] }) {
         </ListSubheader>
       }
     >
+      <ListItem disablePadding sx={{ mb: 0.5 }}>
+        <ListItemButton
+          sx={{
+            borderRadius: 100,
+            bgcolor: genresQuery === "" ? "primary.main" : "",
+          }}
+          onClick={() => {
+            router.push({
+              pathname: "/movies",
+              query: {
+                ...router.query,
+                genres: undefined,
+              },
+            });
+          }}
+        >
+          <ListItemText
+            primary='All'
+            primaryTypographyProps={{ variant: "body2" }}
+          />
+        </ListItemButton>
+      </ListItem>
       {genres.map((genre) => (
         <ListItem key={genre.id} disablePadding sx={{ mb: 0.5 }}>
           <ListItemButton
