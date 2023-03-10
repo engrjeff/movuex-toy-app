@@ -33,11 +33,6 @@ const TvShowsPage: NextPage<TvShowsPageProps> = (props) => {
           mb={3}
         >
           <SectionTitle as='h2'>Popular TV Shows</SectionTitle>
-          <AppPagination
-            count={total_pages}
-            currentPage={page}
-            rootPath='tv-shows'
-          />
         </Stack>
         <Box
           display='grid'
