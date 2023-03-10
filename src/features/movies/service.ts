@@ -1,8 +1,20 @@
-import { apiClient, getBackdropPath, getPosterPath, PaginatedResult } from '@/lib/api';
-import { Movie, MovieDetail } from './types';
+import {
+  apiClient,
+  getBackdropPath,
+  getPosterPath,
+  PaginatedResult,
+} from "@/lib/api";
+import { Genre, Movie, MovieDetail } from "./types";
 
-export const getMovies = async (page: string = '1'): Promise<PaginatedResult<Movie>> => {
-  const response = await apiClient.get<PaginatedResult<Movie>>(`movie/now_playing?page=${page}`);
+export const getMovies = async (
+  page: string = "1",
+  genres: string = ""
+): Promise<PaginatedResult<Movie>> => {
+  const url = genres
+    ? `/discover/movie?page=${page}&sort_by=popularity.desc&include_adult=false&with_genres=${genres}`
+    : `movie/popular?page=${page}`;
+
+  const response = await apiClient.get<PaginatedResult<Movie>>(url);
 
   return {
     ...response.data,
@@ -31,7 +43,7 @@ export const getMovieById = async (id: string): Promise<MovieDetail | null> => {
       },
       videos: {
         results: response.data.videos.results
-          .filter((v) => v.site === 'YouTube' && v.type === 'Trailer')
+          .filter((v) => v.site === "YouTube" && v.type === "Trailer")
           .slice(0, 1),
       },
     };
@@ -41,7 +53,7 @@ export const getMovieById = async (id: string): Promise<MovieDetail | null> => {
 };
 
 export const searchMovies = async (
-  page: string = '1',
+  page: string = "1",
   keyword: string
 ): Promise<PaginatedResult<Movie>> => {
   const response = await apiClient.get<PaginatedResult<Movie>>(
@@ -55,4 +67,12 @@ export const searchMovies = async (
       poster_path: getPosterPath(m.poster_path),
     })),
   };
+};
+
+export const getMovieGenres = async () => {
+  const response = await apiClient.get<{ genres: Genre[] }>(
+    `/genre/movie/list`
+  );
+
+  return response.data.genres;
 };

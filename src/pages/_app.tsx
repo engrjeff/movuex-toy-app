@@ -1,23 +1,33 @@
-import Head from 'next/head';
-import type { AppProps } from 'next/app';
+import type { ReactElement, ReactNode } from "react";
 
-import { CacheProvider, EmotionCache } from '@emotion/react';
-import { ThemeProvider } from '@mui/material/styles';
-import CssBaseline from '@mui/material/CssBaseline';
+import Head from "next/head";
+import type { AppProps } from "next/app";
+import type { NextPage } from "next";
 
-import createEmotionCache from '@/lib/createEmotionCache';
-import theme from '@/lib/theme';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
+import { CacheProvider, EmotionCache } from "@emotion/react";
+import { ThemeProvider } from "@mui/material/styles";
+import CssBaseline from "@mui/material/CssBaseline";
+
+import createEmotionCache from "@/lib/createEmotionCache";
+import theme from "@/lib/theme";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 
 const clientSideEmotionCache = createEmotionCache();
 
+export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
+  getLayout?: (page: ReactElement) => ReactNode;
+};
+
 export interface MyAppProps extends AppProps {
   emotionCache?: EmotionCache;
+  Component: NextPageWithLayout;
 }
 
 export default function App(props: MyAppProps) {
   const { Component, pageProps, emotionCache = clientSideEmotionCache } = props;
+
+  const getLayout = Component.getLayout ?? ((page) => page);
 
   return (
     <CacheProvider value={emotionCache}>
@@ -31,8 +41,8 @@ export default function App(props: MyAppProps) {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <Header />
-        <main style={{ minHeight: '80vh' }}>
-          <Component {...pageProps} />
+        <main style={{ minHeight: "80vh" }}>
+          {getLayout(<Component {...pageProps} />)}
         </main>
         <Footer />
       </ThemeProvider>
