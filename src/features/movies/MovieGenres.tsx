@@ -28,9 +28,7 @@ function MovieGenres({ genres }: { genres: Genre[] }) {
       }}
       aria-labelledby='movies-genres-filter'
       subheader={
-        <ListSubheader component='div' id='movies-genres-filter'>
-          Genres
-        </ListSubheader>
+        <ListSubheader id='movies-genres-filter'>Genres</ListSubheader>
       }
     >
       <ListItem disablePadding sx={{ mb: 0.5 }}>
