@@ -35,12 +35,11 @@ function MovieGenres({ genres }: { genres: Genre[] }) {
             bgcolor: genresQuery === "" ? "primary.main" : "",
           }}
           onClick={() => {
+            const queryCopy = { ...router.query };
+            delete queryCopy.genres;
             router.push({
               pathname: "/movies",
-              query: {
-                ...router.query,
-                genres: undefined,
-              },
+              query: queryCopy,
             });
           }}
         >
