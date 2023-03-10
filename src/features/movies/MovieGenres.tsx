@@ -7,19 +7,18 @@ import ListItemText from "@mui/material/ListItemText";
 import ListSubheader from "@mui/material/ListSubheader";
 
 import type { Genre } from "./types";
-import useIsSmallScreen from "@/hooks/useIsSmallScreen";
 
 function MovieGenres({ genres }: { genres: Genre[] }) {
   const router = useRouter();
-
-  const inSmallScreen = useIsSmallScreen();
-
-  if (inSmallScreen) return null;
 
   const genresQuery = (router.query.genres as string) || "";
   return (
     <List
       sx={{
+        display: {
+          xs: "none",
+          md: "initial",
+        },
         width: "min-content",
         px: 2,
         border: "1px solid",
